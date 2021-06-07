@@ -6,4 +6,11 @@
 .central__container{
   height: 88%;
   display: flex;
+  div{
+    width: 100%;
+    margin: 5px 15px;
+  }
+  .sidenav{
+    width: 5%;
+  }
 }

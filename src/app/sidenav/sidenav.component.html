@@ -1,4 +1,9 @@
 
 <div class="sidenav__container">
-  <p>sidenav works!</p>
+  <div class="sidenav_link"
+  *ngFor="let link of mainService.sidenavLinks"
+  [ngClass]="{'active': link.active}"
+  (click)="setActiveClass(link.id)">
+    <mat-icon aria-hidden="false" routerLink="{{link.link}}">{{link.name}}</mat-icon>
+  </div>
 </div>
