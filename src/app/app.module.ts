@@ -11,12 +11,20 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import {MatIconModule} from '@angular/material/icon';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { FooterComponent } from './footer/footer.component';
+import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidenavComponent,
+    FooterComponent,
+    BookmarksComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
