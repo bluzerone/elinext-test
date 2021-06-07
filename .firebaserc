@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "elinext-test-base": {
+      "hosting": {
+        "elinext-test": [
+          "elinext-test-base"
+        ]
+      }
+    }
+  }
+}
