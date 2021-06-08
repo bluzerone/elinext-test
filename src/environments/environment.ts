@@ -12,6 +12,9 @@ export const environment = {
     messagingSenderId: "676427949575",
     appId: "1:676427949575:web:763c720d1c85479165aca2",
     measurementId: "G-598LEBTWRG"
+  },
+  flickr: {
+    key: 'fa0ee8dcf722e2570243bbf545b9f96c'
   }
 };
 
