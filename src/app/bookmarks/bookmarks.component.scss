@@ -1,0 +1,48 @@
+.paginate-controls-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 55px;
+}
+.bookmarks__main__wrapper{
+  height: 100%;
+  overflow: auto;
+}
+.bookmarks__main__container{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+}
+.empty-bookmarks-message{
+  font-size: 20px;
+  margin-top: 15px;
+}
+.card-image{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+.bookmark-card {
+  max-width: 363px;
+  min-width: 363px;
+  height: 410px;
+  margin: 20px;
+  background-color: rgba(148, 143, 205, 0.557) ;
+}
+.card-image{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+mat-card-header{
+  margin-bottom: 10px;
+}
+mat-card-actions{
+  position: absolute;
+  bottom: 15px;
+}
