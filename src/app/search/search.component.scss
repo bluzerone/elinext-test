@@ -1,5 +1,49 @@
+.paginate-controls-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 55px;
+}
+.main__search{
+  height: 100%;
+  overflow: auto;
+}
 mat-form-field{
-  width: 100%;
+  width: 97%;
   margin-bottom: 15px;
+}
+.photo-card {
+  max-width: 363px;
+  min-width: 363px;
+  height: 410px;
+  margin: 20px;
+  background-color: rgba(148, 143, 205, 0.557) ;
+}
+.main__posts__container{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+}
+mat-card-header{
+  margin-bottom: 10px;
+}
+mat-card-actions{
+  position: absolute;
+  bottom: 15px;
+}
+.card-image{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+.empty-photo-message{
+  font-size: 20px;
+}
+.succes-snackbar{
+  background: rgb(8, 179, 8);
 }
 
