@@ -5,14 +5,14 @@
     maxSize="5"></pagination-controls>
   </div>
   <div class="bookmarks__main__container">
-    <p class="empty-bookmarks-message" *ngIf="bookmarksList.length === 0" >You have no bookmarks at the moment.</p>
+    <p class="empty-bookmarks-message" *ngIf="bookmarksList?.length === 0 " >You have no bookmarks at the moment.</p>
     <div class="bookmarks__main__container">
       <div class="post__wrapper" *ngFor="let card of bookmarksList | paginate:
       { itemsPerPage: 8,
         currentPage: page,
         totalItems: totalLength
         }">
-        <mat-card class="bookmark-card">
+        <mat-card #card class="bookmark-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{card.title | truncate: 30}}</mat-card-title>

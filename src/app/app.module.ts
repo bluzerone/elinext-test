@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 import { TruncateModule } from 'ng2-truncate';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { FooterComponent } from './footer/footer.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { SearchComponent } from './search/search.component';
+import { PopupAuthComponent } from './popup-auth/popup-auth.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { SearchComponent } from './search/search.component';
     SidenavComponent,
     FooterComponent,
     BookmarksComponent,
-    SearchComponent
+    SearchComponent,
+    PopupAuthComponent,
+
   ],
   imports: [
     HttpClientModule,
@@ -52,7 +56,7 @@ import { SearchComponent } from './search/search.component';
     TruncateModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [BnNgIdleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

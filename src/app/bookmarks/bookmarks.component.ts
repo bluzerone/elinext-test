@@ -27,7 +27,7 @@ export class BookmarksComponent implements OnInit {
     this.urlSubscription = this.route.url.subscribe(data => {
       let path: any;
       data.forEach(d => {
-       path = d.path;
+      path = d.path;
       });
       this.mainService.sidenavLinks.forEach(links => {
       if(links.link === path){
@@ -35,18 +35,22 @@ export class BookmarksComponent implements OnInit {
       };
       });
     })
-    this.bookmarksSubscription = this.baseService.getBookmarks().subscribe((res) => {
-     this.bookmarksList = res.map(e =>  {
+    this.bookmarksSubscription =  this.baseService.getBookmarks().subscribe((res) => {
+      this.bookmarksList =  res.map( e =>  {
         return {
-         id: e.payload.doc.id,
-         ...e.payload.doc.data() as {}
-       } as Bookmark;
-     });
-     this.totalLength = this.bookmarksList.length;
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as {}
+        } as Bookmark;
+      });
+      this.totalLength = this.bookmarksList.length;
+      const $session = this.mainService.bnIdle.startWatching(60).subscribe((isTimedOut: boolean) => {
+        if (isTimedOut) {
+          console.log('session expired');
+          $session.unsubscribe();
+        }
+      });
     });
-    this.totalLength = this.bookmarksList.length;
   }
-
 
 
   ngOnDestroy(): void {
