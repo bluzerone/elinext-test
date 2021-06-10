@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class MainService {
     }
   ]
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar,
+              public bnIdle: BnNgIdleService) { }
 
   openSnackBar(message: string, horizont?: any, vertical?: any, classBar?: string) {
     horizont ? this.horizontalPosition = horizont : this.horizontalPosition = 'center'
