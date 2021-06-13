@@ -3,7 +3,15 @@
       <div class="logo__wrapper">
         <div class="logo">Image Finder</div>
       </div>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+      <div *ngIf="!authService.loginState">
+        <mat-icon routerLink='login'>exit_to_app</mat-icon>
+        <mat-icon routerLink='register'>person_add</mat-icon>
+      </div>
+      <div *ngIf="authService.loginState">
+        <mat-icon
+        routerLink='user'>account_circle</mat-icon>
+        <mat-icon  (click)="authService.logout()">cancel</mat-icon>
+      </div>
     </nav>
 </header>
 

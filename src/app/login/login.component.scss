@@ -1,0 +1,13 @@
+.login__title{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 15px;
+  span{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+.login__container{
+  height: 100%;
+  overflow: auto;
+}

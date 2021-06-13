@@ -1,9 +1,19 @@
 
 <div class="sidenav__container">
-  <div class="sidenav_link"
-  *ngFor="let link of mainService.sidenavLinks"
-  [ngClass]="{'active': link.active}"
-  (click)="setActiveClass(link.id)">
-    <mat-icon aria-hidden="false" routerLink="{{link.link}}">{{link.name}}</mat-icon>
-  </div>
+  <!-- <div class="sidenav_link"
+    *ngFor="let link of mainService.sidenavLinks"
+    [ngClass]="{'active': link.active}"
+    (click)="setActiveClass(link.id)">
+    <mat-icon aria-hidden="false" [disabled] = 'authService.userData' routerLink="{{link.link}}">{{link.name}}</mat-icon>
+  </div> -->
+  <button mat-fab color="primary"
+    *ngFor="let link of mainService.sidenavLinks"
+    [ngClass]="{'active': link.active}"
+    (click)="mainService.setActiveClass(link.id)"
+    [disabled] = '!authService.loginState && link.name != "home"'
+    routerLink="{{link.link}}"
+   >
+   <mat-icon [attr.disabled] = 'authService.userData'
+   class="icon">{{link.name}}</mat-icon>
+  </button>
 </div>

@@ -23,6 +23,7 @@ mat-form-field{
   display: -ms-flex;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding-left: 20px;
 }
 mat-card-header{
@@ -46,12 +47,83 @@ mat-card-actions{
 .succes-snackbar{
   background: rgb(8, 179, 8);
 }
-.popup{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.701);
-  top: 0;
-  left: 0;
-  display: none;
+@media screen and (max-width: 1435px){
+  .photo-card {
+    min-width: 290px;
+    max-width: 290px;
+  }
+}
+@media screen and (max-width: 1240px){
+  .photo-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+  .card-image{
+    max-width: 336px;
+    min-width: 280px;
+  }
+  .mat-card-header .mat-card-title{
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 1180px){
+  .photo-card {
+    min-width: 260px;
+    max-width: 260px;
+    height: 320px;
+  }
+  .card-image{
+    max-width: 260px;
+    min-width: 260px;
+    height: 235px;
+  }
+  .mat-card-header .mat-card-title{
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 1180px) and (min-width: 910px){
+  .photo-card {
+    min-width: 325px;
+    max-width: 325px;
+  }
+  .card-image{
+    min-width: 325px;
+    max-width: 325px;
+    height: 235px;
+  }
+}
+@media screen and (max-width: 910px) and (min-width: 800px){
+  .photo-card {
+    min-width: 255px;
+    max-width: 255px;
+  }
+  .card-image{
+    min-width: 255px;
+    max-width: 255px;
+  }
+}
+@media screen and (max-width: 785px) and (min-width: 690px){
+  .photo-card {
+    min-width: 215px;
+    max-width: 215px;
+  }
+  .card-image{
+    min-width: 215px;
+    max-width: 215px;
+  }
+}
+@media screen and (max-width: 690px) and (min-width: 500px){
+  .main__posts__container{
+    padding-left: 0px;
+  }
+  .photo-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 360px;
+  }
+  .card-image{
+    min-width: 320px;
+    max-width: 320px;
+    height: 275px;
+  }
 }

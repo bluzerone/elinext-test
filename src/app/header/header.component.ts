@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../shared/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  //Импортируем AuthService для динамического отобращение кнопок в View.
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }

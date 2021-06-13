@@ -3,7 +3,7 @@
 
 <div class="central__container">
   <app-sidenav class="sidenav"></app-sidenav>
-  <div [@triggerName]="prepareRouteApp(outlet)">
+  <div class="outlet" [@triggerName]="prepareRouteApp(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { MainService } from './../shared/main.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from './../shared/auth.service';
 
 
 @Component({
@@ -10,23 +10,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(public mainService: MainService, private route : ActivatedRoute) { }
+  constructor(public mainService: MainService,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
-    // console.log(this.route.url.subscribe(data => {
-    //   console.log(data);
-
-    // }))
-  }
-
-  setActiveClass(id){
-    this.mainService.sidenavLinks.forEach((item) => {
-      if(item.id == id){
-        item.active = true;
-      } else {
-        item.active = false;
-      }
-    })
   }
 
 }

@@ -1,0 +1,8 @@
+<div class="login__container">
+  <p class="login__title">Log in to your account or <span routerLink='/register'>register</span></p>
+  <ngx-auth-firebaseui-login *ngIf="!authService.loginState"
+  (onSuccess)='onSignin($event)'
+  [registrationEnabled] = false
+  ></ngx-auth-firebaseui-login>
+</div>
+

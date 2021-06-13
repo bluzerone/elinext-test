@@ -9,16 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 import { TruncateModule } from 'ng2-truncate';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { BnNgIdleService } from 'bn-ng-idle';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { LoggedInGuard, NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -26,7 +26,13 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { FooterComponent } from './footer/footer.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { SearchComponent } from './search/search.component';
-import { PopupAuthComponent } from './popup-auth/popup-auth.component';
+import { HomeComponent } from './home/home.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,8 +42,10 @@ import { PopupAuthComponent } from './popup-auth/popup-auth.component';
     FooterComponent,
     BookmarksComponent,
     SearchComponent,
-    PopupAuthComponent,
-
+    HomeComponent,
+    UserComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     HttpClientModule,
@@ -54,9 +62,14 @@ import { PopupAuthComponent } from './popup-auth/popup-auth.component';
     MatButtonModule,
     MatSnackBarModule,
     TruncateModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FlexLayoutModule,
+    NgxAuthFirebaseUIModule.forRoot(environment.firebaseConfig, () => {return 'Search Image'}, {
+      authGuardFallbackURL: '/home',
+      authGuardLoggedInURL: '/search',
+    })
   ],
-  providers: [BnNgIdleService],
+  providers: [NgxAuthFirebaseUIModule, LoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

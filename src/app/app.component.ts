@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   prepareRouteApp(outlet: RouterOutlet) {
     return outlet &&
       outlet.activatedRouteData &&

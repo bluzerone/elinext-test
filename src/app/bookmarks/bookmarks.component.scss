@@ -11,6 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 20px;
+  justify-content: center;
 }
 .empty-bookmarks-message{
   font-size: 20px;
@@ -45,4 +46,84 @@ mat-card-header{
 mat-card-actions{
   position: absolute;
   bottom: 15px;
+}
+@media screen and (max-width: 1435px){
+  .bookmark-card {
+    min-width: 290px;
+    max-width: 290px;
+  }
+}
+@media screen and (max-width: 1240px){
+  .bookmark-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+  .card-image{
+    max-width: 336px;
+    min-width: 280px;
+  }
+  .mat-card-header .mat-card-title{
+    font-size: 12px;
+  }
+}
+// @media screen and (max-width: 1180px){
+//   .photo-card {
+//     min-width: 260px;
+//     max-width: 260px;
+//     height: 320px;
+//   }
+//   .card-image{
+//     max-width: 260px;
+//     min-width: 260px;
+//     height: 235px;
+//   }
+//   .mat-card-header .mat-card-title{
+//     font-size: 12px;
+//   }
+// }
+@media screen and (max-width: 1180px) and (min-width: 1010px){
+  .bookmark-card {
+    min-width: 325px;
+    max-width: 325px;
+  }
+  .card-image{
+    min-width: 325px;
+    max-width: 325px;
+    height: 235px;
+  }
+}
+@media screen and (max-width: 1010px) and (min-width: 800px){
+  .bookmark-card {
+    min-width: 255px;
+    max-width: 255px;
+  }
+  .card-image{
+    min-width: 255px;
+    max-width: 255px;
+  }
+}
+@media screen and (max-width: 800px) and (min-width: 690px){
+  .bookmark-card {
+    min-width: 215px;
+    max-width: 215px;
+  }
+  .card-image{
+    min-width: 215px;
+    max-width: 215px;
+  }
+}
+@media screen and (max-width: 690px) and (min-width: 500px){
+  .bookmarks__main__container{
+    padding-left: 0px;
+  }
+  .bookmark-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 360px;
+  }
+  .card-image{
+    min-width: 320px;
+    max-width: 320px;
+    height: 275px;
+  }
 }

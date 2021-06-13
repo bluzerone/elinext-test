@@ -1,12 +1,14 @@
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { AuthService } from './../shared/auth.service';
 import { Bookmark } from './../models/bookmark';
 import { BaseService } from './../shared/base.service';
 import { FlickrPhoto } from './../models/flickr-photo';
 import { Component, OnInit } from '@angular/core';
 import { FlickrService } from '../shared/flickr.service';
-import { ActivatedRoute } from '@angular/router';
 import { MainService } from './../shared/main.service';
 import { Subject } from 'rxjs';
+
+import { AngularFireAuth } from "@angular/fire/auth";
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 
@@ -23,64 +25,56 @@ export class SearchComponent implements OnInit {
   message:boolean = false;
   totalLength: number;
   page: number = 1;
-  subjectKeyUp = new Subject<any>()
-
+  subjectKeyUp = new Subject<any>();
 
   constructor(public flickrService: FlickrService,
-     private route : ActivatedRoute,
-     public mainService: MainService,
-     public baseService: BaseService) {
-
-     }
-
+              public mainService: MainService,
+              public baseService: BaseService,
+              public afAuth: AngularFireAuth,
+              public authService: AuthService) {}
 
   ngOnInit(): void {
-  this.urlSubscription = this.route.url.subscribe(data => {
-    let path:any;
-    data.forEach(d => {
-     path = d.path;
+    this.mainService.setLinkState('search');
+    // Слушаем события из subjectKeyup, используя методы debounceTime(Для создания задержки ввода и предотвращения излишней нагрузки)
+    // и distinctUntilChange чтобы предотвратить отправку повторяющихся запросов.
+    // Вызываем функцую getPhotos, передавая туда value.
+    this.subjectKeyUp.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
+      this.getPhotos(value);
     });
-    this.mainService.sidenavLinks.forEach(links => {
-    if(links.link === path){
-      links.active = true
-    }
-    });
-  });
-  this.totalLength = this.images.length;
-  this.subjectKeyUp.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
-    this.getPhotos(value);
-  });
-  const $session = this.mainService.bnIdle.startWatching(60).subscribe((isTimedOut: boolean) => {
-    if (isTimedOut) {
-      console.log('session expired');
-      $session.unsubscribe();
-    }
-  });
-  }
-
-  onSearch(event: any){
-    const value = event.target.value
-    this.subjectKeyUp.next(value);
   }
 
   getPhotos(value: any){
-  this.flickrService.search_keyword(value).subscribe(data => {
-    this.images = data;
-  })
+    // Передаём, заделэенный инпут пользователя, подписываемся и получаем массив результата запроса, присваиваем результат переменной images.
+    this.flickrService.search_keyword(value).subscribe(data => {
+      this.images = data;
+    })
   }
 
+  // Функция, вызываемая при keyup на инпуте пользователя, предназначенного для поискового запроса. Принимает event.
+  onSearch(event: any){
+    // Вызываем метод next() у переменной subjectKeyUp, являющейся экземпляром Subject и передаём в next() значение пользовательского ввода.
+    const value = event.target.value;
+    this.subjectKeyUp.next(value);
+  }
+
+  //Функция, вызываемая при нажатии на кнопку "Add to bookmarks", принимает строковые значения сохраняемого обьекта.
   createBookmarkObj(url, title){
     const bookmark: Bookmark = {
+      // К полученным данных добавялем uid пользователя, авторизированного в момент сохранения, для последующей персонализации запроса,
+      // возвращающего массив bookmarksList
+      uid: this.authService.userData.uid,
       url,
       title
     };
+    // Передаём созданный обьект.
     this.baseService.setBookmark(bookmark);
     this.mainService.openSnackBar('photo has been successfully bookmarked!', "right", "bottom", "success-dialog-red");
   }
 
   ngOnDestroy(): void {
-    this.urlSubscription.unsubscribe();
+    // Отписываемся от событий.
     this.subjectKeyUp.unsubscribe();
+    this.mainService.resetLinksState();
   }
 
 }

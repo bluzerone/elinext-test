@@ -37,3 +37,12 @@ button {
   background: #d84444;
   color: #fff;
 }
+
+::-webkit-scrollbar{
+  visibility: hidden;
+}
+
+
+@media screen and (max-width: 900px){
+
+}

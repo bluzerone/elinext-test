@@ -1,0 +1,19 @@
+<div class="user__greeting">
+    <p class="user__greeting-text">Welcome to Search Image <span *ngIf="authService.loginState">{{authService.userData?.displayName}}</span> </p>
+    <p class="about">On this resource you can search and save images from the Flickr.com service</p>
+    <p class="about" *ngIf="authService.loginState">See your profile on <span routerLink='/user'>profile page</span></p>
+    <p class="about">To start searching for images, go to the <span routerLink='/search'>"Search"</span> tab</p>
+    <p class="about" *ngIf="!authService.loginState">To use these opportunities, you must <span routerLink='/register'>register</span>  or <span routerLink='/login'>log in!</span></p>
+</div>
+<div class="about__dev">
+  <p class="about__dev-title">link to the repository with my project and my contacts:</p>
+  <div class="dev__info">
+    <img class="dev-logo" src="./../../assets/github_icon.svg" alt="">
+    <a href="https://github.com/bluzerone/elinext-test/" target="_blank" class="dev-link"> github.com/bluzerone/elinext-test/</a>
+  </div>
+  <div class="dev__info">
+    <img class="dev-logo" src="./../../assets/linkedin_icon.svg" alt="">
+    <a href="https://www.linkedin.com/in/aleksander-akimov/" target="_blank" class="dev-link"> linkedin.com/in/aleksander-akimov/</a>
+  </div>
+
+</div>

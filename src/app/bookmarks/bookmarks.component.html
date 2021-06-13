@@ -14,13 +14,11 @@
         }">
         <mat-card #card class="bookmark-card">
           <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{card.title | truncate: 30}}</mat-card-title>
-            <!-- <mat-card-subtitle>Posted by: {{card.name}}</mat-card-subtitle> -->
+            <mat-card-title>{{card.title | truncate: 40}}</mat-card-title>
           </mat-card-header>
           <div class="card-image" [ngStyle]="{'background-image': 'url(\'' + card.url +  '\')'}"></div>
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="baseService.deleteBookmark(card.id)">Remove from bookmarks</button>
+            <button mat-raised-button color="primary" (click)="baseService.deleteBookmark(card.uid, card.id)">Remove from bookmarks</button>
           </mat-card-actions>
         </mat-card>
       </div>

@@ -2,7 +2,6 @@
   height: 100%;
   width: 100%;
 }
-
 .central__container{
   height: 88%;
   display: flex;
@@ -13,4 +12,46 @@
   .sidenav{
     width: 5%;
   }
+}
+@media screen and (max-width: 1400px){
+  .central__container{
+    .sidenav{
+      width: 7%;
+    }
+  }
+}
+@media screen and (max-width: 1200px){
+  .central__container{
+    .sidenav{
+      width: 5%;
+    }
+  }
+}
+@media screen and (max-width: 900px){
+  .central__container{
+    .sidenav{
+      width: 8%;
+    }
+  }
+}
+@media screen and (max-width: 540px){
+  .central__container{
+    .sidenav{
+      width: 10%;
+    }
+  }
+}
+@media screen and (max-width: 425px){
+  .central__container{
+    .sidenav{
+      width: 14%;
+    }
+  }
+}
+@media screen and (max-width: 425px) and (min-width: 375px){
+  // .central__container{
+  //   div{
+  //     width: 80%;
+  //   }
+  // }
 }
