@@ -24,7 +24,7 @@
         </mat-card-header>
         <div class="card-image" [ngStyle]="{'background-image': 'url(\'' + card.url +  '\')'}"><a href="{{card.url}}" target="_blank" rel="noopener noreferrer"></a></div>
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="createBookmarkObj(card.url, card.title)">Add To Bookmarks</button>
+          <button mat-raised-button class="card-action-button" color="primary" (click)="createBookmarkObj(card.url, card.title)">Add To Bookmarks</button>
         </mat-card-actions>
       </mat-card>
     </div>
