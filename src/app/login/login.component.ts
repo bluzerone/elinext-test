@@ -16,11 +16,11 @@ export class LoginComponent implements OnInit {
   }
 
   // Метод, принимающий обьект User при авторизации пользователя. Создаёт в localStorage обьект user, перенаправляет на home.
-  // И присваивает State true переменной loginState.
+  // Присваивает State true переменной loginState. Пробрасываем в метод next() у BehaviorSubject значение true.
   onSignin(event){
     localStorage.setItem('user', event)
     this.router.navigate(['home']);
-    this.authService.loginState = true;
+    this.authService.loginSubject.next(true);
   }
 
 }
