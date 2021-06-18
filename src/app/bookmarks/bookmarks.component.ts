@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MainService } from '../shared/main.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './../shared/auth.service';
+import { throttleTime } from 'rxjs/operators';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class BookmarksComponent implements OnInit {
   bookmarksList: Bookmark[];
   totalLength: number;
   page: number = 1;
+  modalState: boolean = true;
+  eventsStream$: any;
 
 
   constructor(public mainService: MainService,
@@ -38,11 +41,42 @@ export class BookmarksComponent implements OnInit {
     // Присваиваем длину массива bookmarksList переменной totalLength.
       this.totalLength = this.bookmarksList.length;
     });
+    this.getLoginState$();
+    this.getEventStream$();
+    this.authService.modalState.subscribe(state => {
+      this.modalState = state;
+    });
+  }
+
+   // Функция, возвращает прослушку событий на document, при событиях обнуляет таймер.
+   getEventStream$() {
+    return this.eventsStream$ = this.authService.allEvents$.pipe(throttleTime(1000)).subscribe((event: Event) => {
+      let modal = this.modalState;
+      modal ? false : this.authService.resetCount();
+    });
+  }
+
+  // Функция, возвращает прослушку BehaviorSubject, получая loginState, если loginState = true, то вызывает метод initIdle, в который передается
+  // значение таймера. В противном случае вызывается метод stopCount, останавливающий таймер неактивности пользователя.
+  getLoginState$(){
+    return  this.authService.loginSubject.subscribe((loginState: boolean) => {
+      loginState ? this.authService.initIdle(11) : this.authService.stopCount();
+    });
+  }
+
+  abortIdleLogout(){
+    this.authService.startCount();
+    clearInterval(this.authService.remainigToLogoutCounter);
+    this.authService.modalState.next(false);
   }
 
   ngOnDestroy(): void {
-  //Отписываемся от изменений из BAseService.
+  //Отписываемся от прослушек
     this.bookmarksSubscription.unsubscribe();
+    this.eventsStream$.unsubscribe();
+    this.getLoginState$().unsubscribe();
+    this.getEventStream$().unsubscribe();
+    this.authService.resetCount();
   }
 
 }

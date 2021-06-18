@@ -8,7 +8,7 @@ import { MainService } from './../shared/main.service';
 import { Subject } from 'rxjs';
 
 import { AngularFireAuth } from "@angular/fire/auth";
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, throttleTime } from 'rxjs/operators';
 
 
 
@@ -26,6 +26,8 @@ export class SearchComponent implements OnInit {
   totalLength: number;
   page: number = 1;
   subjectKeyUp = new Subject<any>();
+  eventsStream$: any;
+  modalState: Boolean;
 
   constructor(public flickrService: FlickrService,
               public mainService: MainService,
@@ -41,15 +43,33 @@ export class SearchComponent implements OnInit {
     this.subjectKeyUp.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
       this.getPhotos(value);
     });
+    this.getLoginState$();
+    this.getEventStream$();
+    this.authService.modalState.subscribe(state => {
+      this.modalState = state;
+    });
   }
 
+  // Функция, возвращает прослушку событий на document, при событиях обнуляет таймер.
+   getEventStream$() {
+    return this.eventsStream$ = this.authService.allEvents$.pipe(throttleTime(1000)).subscribe((event: Event) => {
+      let modal = this.modalState;
+      modal ? false : this.authService.resetCount();
+    });
+  }
+  // Функция, возвращает прослушку BehaviorSubject, получая loginState, если loginState = true, то вызывает метод initIdle, в который передается
+  // значение таймера. В противном случае вызывается метод stopCount, останавливающий таймер неактивности пользователя.
+  getLoginState$(){
+    return  this.authService.loginSubject.subscribe((loginState: boolean) => {
+      loginState ? this.authService.initIdle(11) : this.authService.stopCount();
+    });
+  }
+  // Передаём, заделэенный инпут пользователя, подписываемся и получаем массив результата запроса, присваиваем результат переменной images.
   getPhotos(value: any){
-    // Передаём, заделэенный инпут пользователя, подписываемся и получаем массив результата запроса, присваиваем результат переменной images.
     this.flickrService.search_keyword(value).subscribe(data => {
       this.images = data;
     })
   }
-
   // Функция, вызываемая при keyup на инпуте пользователя, предназначенного для поискового запроса. Принимает event.
   onSearch(event: any){
     // Вызываем метод next() у переменной subjectKeyUp, являющейся экземпляром Subject и передаём в next() значение пользовательского ввода.
@@ -75,6 +95,10 @@ export class SearchComponent implements OnInit {
     // Отписываемся от событий.
     this.subjectKeyUp.unsubscribe();
     this.mainService.resetLinksState();
+    this.eventsStream$.unsubscribe();
+    this.getLoginState$().unsubscribe();
+    this.getEventStream$().unsubscribe();
+    this.authService.resetCount();
   }
 
 }

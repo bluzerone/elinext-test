@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   //При инициализации страницы присваиваем переменной loginSubject Observable<Boolean>, возвращенный BehaviorSubject<boolean>.
   ngOnInit(): void {
     this.mainService.setLinkState('home');
-    this.$loginSubject = this.authService.loginSubject
+    this.$loginSubject = this.authService.loginSubject;
   }
 
   ngOnDestroy(): void {

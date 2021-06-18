@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +30,7 @@ export class MainService {
     }
   ]
 
-  constructor(private _snackBar: MatSnackBar,
-              public authService: AuthService) { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   // Функция открытия matSnackBar, принмающая отображаемое сообщение, гооризонтальную и вертикальную позиции.
   openSnackBar(message: string, horizont?: any, vertical?: any, classBar?: string) {

@@ -1,16 +1,14 @@
 import { MainService } from './main.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService {
 
-  constructor(public afs: AngularFirestore,
-              private mainService: MainService,
-              public authService: AuthService) { }
+  constructor(private afs: AngularFirestore,
+              private mainService: MainService) { }
 
   // Функция, возвращающая Observable на коллекцию Bookmar[], содержащую обьекты, сохранные пользователем авторизированным в данный момент.
   getBookmarks(uid){

@@ -29,4 +29,19 @@
       </mat-card>
     </div>
   </div>
+  <div class="popup"[ngClass]="{active__modal : modalState}">
+    <div class="popup__body" [ngClass]="{active__modal : modalState}">
+      <div class="popup__content" [ngClass]="{active__modal : modalState}">
+        <div class="popup__close" (click)="authService.abortIdleLogout($event)">Х</div>
+        <div class="popup__title">You have been inactive for a while</div>
+        <div class="popup__text">You will be sign out in <span>{{authService.remainigToLogoutCount}}</span> seconds</div>
+        <div class="popup__text">To cancel, close the window or click the "Continue Session" button.</div>
+        <button mat-raised-button
+         id="button"
+         color="primary"
+         (click)="authService.abortIdleLogout($event)">Continue Session</button>
+      </div>
+    </div>
+  </div>
+
 </div>
