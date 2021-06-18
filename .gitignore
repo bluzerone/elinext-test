@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.firebase/hosting.ZGlzdC9lbGluZXh0LXRlc3Q.cache
+.vscode/settings.json
+.firebase/hosting.ZGlzdC9lbGluZXh0LXRlc3Q.cache
