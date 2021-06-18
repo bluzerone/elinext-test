@@ -81,7 +81,8 @@ export class AuthService {
           console.log(this.remainigToLogoutCount);
           this.remainigToLogoutCount === 1 ? clearInterval(this.remainigToLogoutCounter) : false;
         }, 1000)
-      }else {
+      }
+      else {
         clearInterval(this.remainigToLogoutCounter);
         this.remainigToLogoutCounter = setInterval(() => {
           this.remainigToLogoutCount--;
@@ -91,9 +92,7 @@ export class AuthService {
       }
       this.timeoutModal = setTimeout(() => {
         this.logout();
-
       }, 10000);
-
     }
     else {
       this.seconds = this.seconds + 1;

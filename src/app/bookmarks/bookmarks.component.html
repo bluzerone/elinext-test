@@ -16,7 +16,7 @@
           <mat-card-header>
             <mat-card-title>{{card.title | truncate: 40}}</mat-card-title>
           </mat-card-header>
-          <div class="card-image" [ngStyle]="{'background-image': 'url(\'' + card.url +  '\')'}"><a href="{{card.url}}" target="_blank" rel="noopener noreferrer"></a></div>
+          <div class="card-image" [ngStyle]="{'background-image': 'url(\'' + card.url +  '\')'}"><a href="{{card.url}}" target="_blank" *ngIf="!modalState" ></a></div>
           <mat-card-actions [ngClass]="{mat__action : modalState}">
             <button mat-raised-button color="primary" (click)="baseService.deleteBookmark(card.uid, card.id)">Remove from bookmarks</button>
           </mat-card-actions>
