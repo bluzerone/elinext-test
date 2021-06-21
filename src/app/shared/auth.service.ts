@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth'
-import { BehaviorSubject, fromEvent, merge, of } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,6 @@ export class AuthService {
   timeoutModal: any;
   remainigToLogoutCounter: any;
   remainigToLogoutCount: number = 10;
-  remainigToLogoutCount$ = of(this.remainigToLogoutCount);
   seconds: number = 0;
   timerIsOn = false;
   idleTime = 0;
@@ -44,7 +43,7 @@ export class AuthService {
       } else {
         localStorage.removeItem('user');
         this.loginSubject.next(false);
-      };
+      }
     });
 
   }
@@ -60,7 +59,6 @@ export class AuthService {
       this.modalState.next(false);
       this.stopCount();
       clearInterval(this.remainigToLogoutCounter);
-      console.log('Logout from auth service');
     });
   }
 
@@ -78,7 +76,6 @@ export class AuthService {
       if(!this.remainigToLogoutCounter){
         this.remainigToLogoutCounter = setInterval(() => {
           this.remainigToLogoutCount--;
-          console.log(this.remainigToLogoutCount);
           this.remainigToLogoutCount === 1 ? clearInterval(this.remainigToLogoutCounter) : false;
         }, 1000)
       }
@@ -86,7 +83,6 @@ export class AuthService {
         clearInterval(this.remainigToLogoutCounter);
         this.remainigToLogoutCounter = setInterval(() => {
           this.remainigToLogoutCount--;
-          console.log(this.remainigToLogoutCount);
           this.remainigToLogoutCount === 1 ? clearInterval(this.remainigToLogoutCounter) : false;
         }, 1000)
       }

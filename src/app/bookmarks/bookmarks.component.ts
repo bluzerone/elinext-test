@@ -1,11 +1,10 @@
-import { Bookmark } from './../models/bookmark';
-import { BaseService } from './../shared/base.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MainService } from '../shared/main.service';
-import { Subscription } from 'rxjs';
-import { AuthService } from './../shared/auth.service';
-import { throttleTime } from 'rxjs/operators';
+import {Bookmark} from '../models/bookmark';
+import {BaseService} from '../shared/base.service';
+import {Component, OnInit} from '@angular/core';
+import {MainService} from '../shared/main.service';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../shared/auth.service';
+import {throttleTime} from 'rxjs/operators';
 
 
 @Component({
@@ -24,12 +23,13 @@ export class BookmarksComponent implements OnInit {
 
 
   constructor(public mainService: MainService,
-              private route : ActivatedRoute,
               public baseService: BaseService,
               public authService: AuthService) { }
 
   ngOnInit(): void {
+
     this.mainService.setLinkState('bookmarks');
+
     // Подписываемся получение массива BookmarksList из BaseService.
     this.bookmarksSubscription =  this.baseService.getBookmarks(this.authService.userData.uid).subscribe((res) => {
       this.bookmarksList =  res.map( e =>  {
@@ -41,8 +41,10 @@ export class BookmarksComponent implements OnInit {
     // Присваиваем длину массива bookmarksList переменной totalLength.
       this.totalLength = this.bookmarksList.length;
     });
+
     this.getLoginState$();
     this.getEventStream$();
+
     this.authService.modalState.subscribe(state => {
       this.modalState = state;
     });
@@ -60,14 +62,8 @@ export class BookmarksComponent implements OnInit {
   // значение таймера. В противном случае вызывается метод stopCount, останавливающий таймер неактивности пользователя.
   getLoginState$(){
     return  this.authService.loginSubject.subscribe((loginState: boolean) => {
-      loginState ? this.authService.initIdle(11) : this.authService.stopCount();
+      loginState ? this.authService.initIdle(60) : this.authService.stopCount();
     });
-  }
-
-  abortIdleLogout(){
-    this.authService.startCount();
-    clearInterval(this.authService.remainigToLogoutCounter);
-    this.authService.modalState.next(false);
   }
 
   ngOnDestroy(): void {

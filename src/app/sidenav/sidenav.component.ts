@@ -1,7 +1,6 @@
-import { MainService } from './../shared/main.service';
+import { MainService } from '../shared/main.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../shared/auth.service';
-
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-sidenav',

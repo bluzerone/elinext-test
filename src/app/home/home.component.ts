@@ -1,8 +1,8 @@
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { MainService } from './../shared/main.service';
+import { MainService } from '../shared/main.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../shared/auth.service';
+import { AuthService } from '../shared/auth.service';
 
 
 @Component({
