@@ -15,5 +15,8 @@
     <img class="dev-logo" src="./../../assets/linkedin_icon.svg" alt="">
     <a href="https://www.linkedin.com/in/aleksander-akimov/" target="_blank" class="dev-link"> linkedin.com/in/aleksander-akimov/</a>
   </div>
+  <div class="about__unactive" *ngIf="($loginSubject | async) as loginState">
+    If you are inactive for 60 seconds, you will be automatically unauthorized!
+  </div>
 
 </div>
