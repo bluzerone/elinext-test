@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class FlickrService {
           urlArray.push(photoObject)
         });
       return urlArray;
-
+    },error => {
+      throwError(error);
     }));
   }
 

@@ -2,7 +2,7 @@ import {Bookmark} from '../models/bookmark';
 import {BaseService} from '../shared/base.service';
 import {Component, OnInit} from '@angular/core';
 import {MainService} from '../shared/main.service';
-import {Subscription} from 'rxjs';
+import {Subscription, throwError} from 'rxjs';
 import {AuthService} from '../shared/auth.service';
 import {throttleTime} from 'rxjs/operators';
 
@@ -40,6 +40,8 @@ export class BookmarksComponent implements OnInit {
       });
     // Присваиваем длину массива bookmarksList переменной totalLength.
       this.totalLength = this.bookmarksList.length;
+    },error => {
+      throwError(error);
     });
 
     this.getLoginState$();
@@ -47,6 +49,8 @@ export class BookmarksComponent implements OnInit {
 
     this.authService.modalState.subscribe(state => {
       this.modalState = state;
+    },error => {
+      throwError(error);
     });
   }
 
@@ -55,6 +59,8 @@ export class BookmarksComponent implements OnInit {
     return this.eventsStream$ = this.authService.allEvents$.pipe(throttleTime(1000)).subscribe((event: Event) => {
       let modal = this.modalState;
       modal ? false : this.authService.resetCount();
+    },error => {
+      throwError(error);
     });
   }
 
@@ -63,6 +69,8 @@ export class BookmarksComponent implements OnInit {
   getLoginState$(){
     return  this.authService.loginSubject.subscribe((loginState: boolean) => {
       loginState ? this.authService.initIdle(60) : this.authService.stopCount();
+    },error => {
+      throwError(error);
     });
   }
 

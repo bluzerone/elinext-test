@@ -5,7 +5,7 @@ import { FlickrPhoto } from '../models/flickr-photo';
 import { Component, OnInit } from '@angular/core';
 import { FlickrService } from '../shared/flickr.service';
 import { MainService } from '../shared/main.service';
-import { Subject } from 'rxjs';
+import {Subject, throwError} from 'rxjs';
 
 import { AngularFireAuth } from "@angular/fire/auth";
 import { debounceTime, distinctUntilChanged, throttleTime } from 'rxjs/operators';
@@ -43,6 +43,8 @@ export class SearchComponent implements OnInit {
     // Вызываем функцую getPhotos, передавая туда value.
     this.subjectKeyUp.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
       this.getPhotos(value);
+    },error => {
+      throwError(error);
     });
 
     this.getLoginState$();
@@ -58,6 +60,8 @@ export class SearchComponent implements OnInit {
     return this.eventsStream$ = this.authService.allEvents$.pipe(throttleTime(1000)).subscribe((event: Event) => {
       let modal = this.modalState;
       modal ? false : this.authService.resetCount();
+    },error => {
+      throwError(error);
     });
   }
 
@@ -66,6 +70,8 @@ export class SearchComponent implements OnInit {
   getLoginState$(){
     return  this.authService.loginSubject.subscribe((loginState: boolean) => {
       loginState ? this.authService.initIdle(60) : this.authService.stopCount();
+    },error => {
+      throwError(error);
     });
   }
 
@@ -73,6 +79,8 @@ export class SearchComponent implements OnInit {
   getPhotos(value: any){
     this.flickrService.search_keyword(value).subscribe(data => {
       this.images = data;
+    },error => {
+      throwError(error);
     })
   }
 

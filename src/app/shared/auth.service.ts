@@ -44,6 +44,8 @@ export class AuthService {
         localStorage.removeItem('user');
         this.loginSubject.next(false);
       }
+    }, error => {
+      console.log(error);
     });
 
   }
@@ -117,10 +119,6 @@ export class AuthService {
   stopCount() {
     clearTimeout(this.timeoutID);
     this.timerIsOn = false;
-  }
-
-  getSeconds(){
-    return this.seconds;
   }
 
   abortIdleLogout(event: Event){
